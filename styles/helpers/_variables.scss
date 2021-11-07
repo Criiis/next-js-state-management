@@ -1,0 +1,17 @@
+//breakpoints
+$mobileMax: 767px;
+$tabletMin: 768px;
+$tabletMax: 1023px;
+$desktopMin: 1024px;
+$desktopMax: 1399px;
+$superDesktopMin: 1400px;
+
+//variable colors
+:root {
+  --primaryColor: #a08e8e;
+  --secondaryColor: #ffffff;
+  --tertiaryColor: #000000;
+  --quaternaryColor: #dddddd;
+  --lightColor: #f8f8f8;
+  --blue: #0070f3;
+}
