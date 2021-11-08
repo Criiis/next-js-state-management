@@ -1,9 +1,9 @@
 interface TitleProps {
-  title: string; // required
-  subtitle?: string; // optional
+  title: string // required
+  subtitle?: string // optional
 }
 
-export default function Title({title, subtitle}: TitleProps) {
+export default function Title({ title, subtitle }: TitleProps) {
   return (
     <>
       <h1>{title}</h1>
