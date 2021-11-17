@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import FetchingProducts from './components/Fetching-products'
+import ProductCard from './components/ProductCard'
 import productsDataTypes from './components/Fetching-products.d'
+import styles from '../styles/plp.module.scss'
 
 export default function products(): JSX.Element {
   const [localProducts, setLocalProducts] = useState<productsDataTypes[] | []>(
@@ -13,11 +15,10 @@ export default function products(): JSX.Element {
   }, [])
 
   return (
-    <div>
+    <div className={styles.productContainer}>
       {localProducts?.map((el: productsDataTypes) => (
-        <li key={el.id}>{el.title}</li>
+        <ProductCard el={el} key={el.id} />
       ))}
-      <h1>this will be PLP</h1>
     </div>
   )
 }
