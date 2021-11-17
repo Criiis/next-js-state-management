@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <HeadPage />
       <Menu />
       <Component {...pageProps} />
-      <Footer />
     </>
   )
 }
