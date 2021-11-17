@@ -9,8 +9,8 @@ export default function Menu(): JSX.Element {
         </Link>
       </li>
       <li>
-        <Link href='/about'>
-          <a>About Us</a>
+        <Link href='/products'>
+          <a>products</a>
         </Link>
       </li>
     </ul>
