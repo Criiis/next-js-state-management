@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router'
 
-export default function singleProduct() {
-  const router = useRouter()
-  const { id } = router.query
+export default function singleProduct(): JSX.Element {
+  const router: NextRouter = useRouter()
+  const id: string | string[] | undefined = router.query.id
 
   return (
     <div>
@@ -10,3 +10,5 @@ export default function singleProduct() {
     </div>
   )
 }
+
+//https://fakestoreapi.com/products/3
