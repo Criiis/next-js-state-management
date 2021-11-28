@@ -10,7 +10,6 @@ interface Props {
 
 //page
 const Products: NextPage<Props> = ({ data }) => {
-  console.log(data)
   return (
     <div className={styles.productContainer}>
       {data?.map((el: productsDataTypes) => (
@@ -30,7 +29,7 @@ export async function getStaticProps(): Promise<{
   const data: productsDataTypes[] = await res.json()
 
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data }, // could revalidate the data 
   }
 }
 

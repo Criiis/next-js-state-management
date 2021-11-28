@@ -1,10 +1,13 @@
 import productsDataTypes from '../../components/products'
+import { useCart } from 'react-use-cart'
 
 function singleProduct({
   product,
 }: {
   product: productsDataTypes
 }): JSX.Element {
+  const { addItem } = useCart()
+
   return (
     <div>
       <h1>{product?.title}</h1>
@@ -17,7 +20,13 @@ function singleProduct({
       />
       <h5>{product?.price} £</h5>
 
-      <button>Add cart</button>
+      <button
+        onClick={() => {
+          addItem({ id: `${product.id}`, price: product.price }, 1)
+        }}
+      >
+        Add to cart
+      </button>
     </div>
   )
 }

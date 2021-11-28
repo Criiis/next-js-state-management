@@ -1,6 +1,9 @@
 import type { NextPage } from 'next'
+import { useCart } from 'react-use-cart'
 
 const Cart: NextPage = () => {
+  const { items } = useCart()
+  console.log(items)
   return (
     <>
       <h1>cart page</h1>
