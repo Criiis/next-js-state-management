@@ -16,12 +16,13 @@ function singleProduct({
         loading='lazy'
       />
       <h5>{product?.price} £</h5>
+
+      <button>Add cart</button>
     </div>
   )
 }
 
 // source of information -> https://stackoverflow.com/questions/65783199/error-getstaticpaths-is-required-for-dynamic-ssg-pages-and-is-missing-for-xxx
-
 //types for paths params server side rendering
 interface paths {
   params: params
