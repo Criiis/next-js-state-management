@@ -27,7 +27,7 @@ export async function getStaticProps(): Promise<{
   }
 }> {
   const res = await fetch('https://fakestoreapi.com/products')
-  const data = await res.json()
+  const data: FetchingProducts[] = await res.json()
 
   return {
     props: { data }, // will be passed to the page component as props

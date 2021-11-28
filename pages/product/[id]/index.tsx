@@ -1,9 +1,10 @@
-// import { NextRouter, useRouter } from 'next/router'
-// import { GetStaticProps } from 'next'
+import productsDataTypes from '../../components/products'
 
-function singleProduct({ product }: any): JSX.Element {
-  console.log(product)
-
+function singleProduct({
+  product,
+}: {
+  product: productsDataTypes
+}): JSX.Element {
   return (
     <div>
       <h1>{product?.title}</h1>
@@ -20,22 +21,38 @@ function singleProduct({ product }: any): JSX.Element {
 }
 
 // source of information -> https://stackoverflow.com/questions/65783199/error-getstaticpaths-is-required-for-dynamic-ssg-pages-and-is-missing-for-xxx
-//getting all the static paths
-export async function getStaticPaths() {
-  const res = await fetch('https://fakestoreapi.com/products')
-  const products = await res.json()
 
-  const paths = products.map((product: any) => ({
+//types for paths params server side rendering
+interface paths {
+  params: params
+}
+export interface params {
+  id: string
+}
+
+//getting all the static paths
+export async function getStaticPaths(): Promise<{
+  paths: paths[]
+  fallback: boolean
+}> {
+  const res = await fetch('https://fakestoreapi.com/products')
+  const products: productsDataTypes[] = await res.json()
+
+  const paths: paths[] = products.map((product: productsDataTypes) => ({
     params: { id: product.id.toString() },
   }))
 
   return { paths, fallback: false }
 }
 
-//getting all the data for the product
-export async function getStaticProps({ params }: any) {
+//getting all the data for the product using the prams from the static paths
+export async function getStaticProps({ params }: paths): Promise<{
+  props: {
+    product: productsDataTypes
+  }
+}> {
   const res = await fetch(`https://fakestoreapi.com/products/${params.id}`)
-  const product = await res.json()
+  const product: productsDataTypes = await res.json()
 
   return { props: { product } }
 }
