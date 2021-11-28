@@ -1,8 +1,12 @@
 import Link from 'next/link'
 import styles from '../../styles/components/ProductCard.module.scss'
+import productsDataTypes from './products'
 
-export default function ProductCard({ el }: any): JSX.Element {
-  console.log(el)
+export default function ProductCard({
+  el,
+}: {
+  el: productsDataTypes
+}): JSX.Element {
   return (
     <div className={styles.singleProduct}>
       <img loading='lazy' src={el.image} alt={el.title} />
