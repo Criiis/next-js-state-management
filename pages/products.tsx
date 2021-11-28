@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import FetchingProducts from './components/products.d'
-
+import type { NextPage } from 'next'
 import ProductCard from './components/ProductCard'
-import productsDataTypes from './components/products'
+import productsDataTypes from './components/products.d'
 import styles from '../styles/plp.module.scss'
 
-export default function products({
-  data,
-}: {
-  data: FetchingProducts[]
-}): JSX.Element {
+//props for the next page
+interface Props {
+  data: productsDataTypes[]
+}
+
+//page
+const Products: NextPage<Props> = ({ data }) => {
   console.log(data)
   return (
     <div className={styles.productContainer}>
@@ -20,16 +20,18 @@ export default function products({
   )
 }
 
-//Products server side render
+//All products server side render
 export async function getStaticProps(): Promise<{
   props: {
-    data: FetchingProducts[]
+    data: productsDataTypes[]
   }
 }> {
   const res = await fetch('https://fakestoreapi.com/products')
-  const data: FetchingProducts[] = await res.json()
+  const data: productsDataTypes[] = await res.json()
 
   return {
     props: { data }, // will be passed to the page component as props
   }
 }
+
+export default Products
