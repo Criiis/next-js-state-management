@@ -13,6 +13,11 @@ export default function Menu(): JSX.Element {
           <a>products</a>
         </Link>
       </li>
+      <li>
+        <Link href='/cart'>
+          <a>cart</a>
+        </Link>
+      </li>
     </ul>
   )
 }
