@@ -1,12 +1,15 @@
 import productsDataTypes from '../../components/products'
-import { useCart } from 'react-use-cart'
+import { useDispatchCart } from '../../helper/CartProvider'
 
 function singleProduct({
   product,
 }: {
   product: productsDataTypes
 }): JSX.Element {
-  const { addItem } = useCart()
+  const dispatch: any = useDispatchCart() //https://stackoverflow.com/questions/54844839/typescript-how-to-type-the-dispatch-in-redux check the types
+  const addToCart = (item: any) => {
+    dispatch({ type: 'ADD', item })
+  }
 
   return (
     <div>
@@ -20,13 +23,7 @@ function singleProduct({
       />
       <h5>{product?.price} £</h5>
 
-      <button
-        onClick={() => {
-          addItem({ id: `${product.id}`, price: product.price }, 1)
-        }}
-      >
-        Add to cart
-      </button>
+      <button onClick={() => addToCart(product)}>Add to cart</button>
     </div>
   )
 }

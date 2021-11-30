@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { useCart } from 'react-use-cart'
+import { useCart } from '../helper/CartProvider'
 
 export default function Menu(): JSX.Element {
-  const { totalItems } = useCart()
+  const items: any = useCart()
+
   return (
     <ul>
       <li>
@@ -17,7 +18,7 @@ export default function Menu(): JSX.Element {
       </li>
       <li>
         <Link href='/cart'>
-          <a>cart {totalItems}</a>
+          <a>cart {items.length}</a>
         </Link>
       </li>
     </ul>

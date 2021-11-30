@@ -29,7 +29,7 @@ export async function getStaticProps(): Promise<{
   const data: productsDataTypes[] = await res.json()
 
   return {
-    props: { data }, // could revalidate the data 
+    props: { data }, // could revalidate the data
   }
 }
 
