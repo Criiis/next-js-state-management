@@ -18,10 +18,15 @@ export interface ContextState {
 }
 
 type ActionType = 'ADD' | 'REMOVE'
-export interface Action {
-  type: ActionType
-  item: contextProducts
-  index: number
-}
+
+export type Action =
+  | {
+      type: ActionType
+      item: contextProducts
+    }
+  | {
+      type: ActionType
+      index: number
+    }
 
 export type DispatchTEST = ({}: Action) => void

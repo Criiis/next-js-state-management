@@ -8,13 +8,15 @@ import contextProducts, {
 
 //check the initial state (should get it from local storage)
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
-const CartDispatchContext = createContext({} as ContextState | DispatchTEST)
+const CartDispatchContext = createContext({} as DispatchTEST)
 const CartContextState = createContext([] as [] | contextProducts[])
 
 const reducer = (
   state: [] | contextProducts[],
   action: Action
 ): [] | contextProducts[] => {
+  console.log(action.item)
+  console.log(action.index)
   switch (action.type) {
     case 'ADD':
       ////update local storage
