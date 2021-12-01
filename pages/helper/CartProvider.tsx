@@ -1,10 +1,14 @@
 //use context cart
 import { createContext, useContext, useReducer } from 'react'
-import contextProducts, { ContextState, Action } from './CartProvider.d'
+import contextProducts, {
+  ContextState,
+  Action,
+  DispatchTEST,
+} from './CartProvider.d'
 
 //check the initial state (should get it from local storage)
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
-const CartDispatchContext = createContext({} as ContextState)
+const CartDispatchContext = createContext({} as ContextState | DispatchTEST)
 const CartContextState = createContext([] as [] | contextProducts[])
 
 const reducer = (

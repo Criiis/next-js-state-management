@@ -14,13 +14,14 @@ interface rating {
 }
 
 export interface ContextState {
-  name: string | null
+  name: string | null | Action
 }
 
 type ActionType = 'ADD' | 'REMOVE'
-
 export interface Action {
   type: ActionType
   item: contextProducts
   index: number
 }
+
+export type DispatchTEST = ({}: Action) => void
