@@ -1,29 +1,32 @@
 //use context cart
 import { createContext, useContext, useReducer } from 'react'
+import contextProducts, { ContextState, Action } from './CartProvider.d'
 
+//check the initial state (should get it from local storage)
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
-interface IContextProps {
-  dispatch: ({ type }: { type: any }) => void
-}
+const CartDispatchContext = createContext({} as ContextState)
+const CartContextState = createContext([] as [] | contextProducts[])
 
-const CartContextState: any = createContext({} as IContextProps) //check this
-const CartDispatchContext: any = createContext({} as IContextProps) //check this
-
-const reducer = (state: any, action: any) => {
+const reducer = (
+  state: [] | contextProducts[],
+  action: Action
+): [] | contextProducts[] => {
   switch (action.type) {
     case 'ADD':
+      ////update local storage
       return [...state, action.item]
     case 'REMOVE':
-      const cartProducts: any = [...state]
+      //update local storage
+      const cartProducts: [] | contextProducts[] = [...state]
       cartProducts.splice(action.index, 1)
       return cartProducts
-      return
     default:
       throw new Error(`couldn't ${action.type}`)
   }
 }
 
-const CartProvider = ({ children }: any) => {
+//why reactNode? https://stackoverflow.com/questions/58123398/when-to-use-jsx-element-vs-reactnode-vs-reactelement/59840095#59840095
+const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, [])
   return (
     <CartDispatchContext.Provider value={dispatch}>
