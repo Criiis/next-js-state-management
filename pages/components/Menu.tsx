@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useCart } from '../helper/CartProvider'
+import CartProvider from '../helper/CartProvider.d'
 
 export default function Menu(): JSX.Element {
-  const items: any = useCart()
+  const items: CartProvider[] = useCart()
 
   return (
     <ul>
