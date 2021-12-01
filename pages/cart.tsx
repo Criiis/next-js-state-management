@@ -1,12 +1,13 @@
 import type { NextPage } from 'next'
 import Link from 'next/dist/client/link'
 import { useCart, useDispatchCart } from './helper/CartProvider'
+import contextProducts from './helper/CartProvider.d'
 
 const Cart: NextPage = () => {
-  const items: any = useCart()
-  console.log(items)
-  const dispatch: any = useDispatchCart() //https://stackoverflow.com/questions/54844839/typescript-how-to-type-the-dispatch-in-redux check the types
-  const removeToCart = (index: any) => {
+  const items: contextProducts[] = useCart()
+
+  const dispatch: any = useDispatchCart()
+  const removeToCart = (index: number): void => {
     dispatch({ type: 'REMOVE', index })
   }
 
