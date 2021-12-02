@@ -15,8 +15,6 @@ const reducer = (
   state: [] | contextProducts[],
   action: Action
 ): [] | contextProducts[] => {
-  console.log(action.item)
-  console.log(action.index)
   switch (action.type) {
     case 'ADD':
       ////update local storage
@@ -27,7 +25,7 @@ const reducer = (
       cartProducts.splice(action.index, 1)
       return cartProducts
     default:
-      throw new Error(`couldn't ${action.type}`)
+      throw new Error(`couldn't ${action}`)
   }
 }
 

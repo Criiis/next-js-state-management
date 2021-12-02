@@ -17,15 +17,15 @@ export interface ContextState {
   name: string | null | Action
 }
 
-type ActionType = 'ADD' | 'REMOVE'
+// type ActionType = 'ADD' | 'REMOVE' <- should be used for the action
 
 export type Action =
   | {
-      type: ActionType
+      type: 'ADD'
       item: contextProducts
     }
   | {
-      type: ActionType
+      type: 'REMOVE'
       index: number
     }
 
