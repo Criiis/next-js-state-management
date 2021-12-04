@@ -1,14 +1,11 @@
 //use context cart
 import { createContext, useContext, useReducer } from 'react'
-import contextProducts, {
-  ContextState,
-  Action,
-  DispatchTEST,
-} from './CartProvider.d'
+import contextProducts, { Action, DispatchContext } from './CartProvider.d'
+import { updateLocalStorageCart } from './test'
 
 //check the initial state (should get it from local storage)
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
-const CartDispatchContext = createContext({} as DispatchTEST)
+const CartDispatchContext = createContext({} as DispatchContext)
 const CartContextState = createContext([] as [] | contextProducts[])
 
 const reducer = (
@@ -17,6 +14,7 @@ const reducer = (
 ): [] | contextProducts[] => {
   switch (action.type) {
     case 'ADD':
+      updateLocalStorageCart()
       ////update local storage
       return [...state, action.item]
     case 'REMOVE':

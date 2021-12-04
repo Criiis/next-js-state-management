@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import Link from 'next/dist/client/link'
 import { useCart, useDispatchCart } from './helper/CartProvider'
-import contextProducts, { DispatchTEST } from './helper/CartProvider.d'
+import contextProducts, { DispatchContext } from './helper/CartProvider.d'
 
 const Cart: NextPage = () => {
   const items: contextProducts[] = useCart()
 
-  const dispatch: DispatchTEST = useDispatchCart()
+  const dispatch: DispatchContext = useDispatchCart()
   const removeToCart = (index: number): void => {
     dispatch({ type: 'REMOVE', index })
   }

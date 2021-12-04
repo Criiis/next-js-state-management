@@ -13,12 +13,6 @@ interface rating {
   count: number
 }
 
-export interface ContextState {
-  name: string | null | Action
-}
-
-// type ActionType = 'ADD' | 'REMOVE' <- should be used for the action
-
 export type Action =
   | {
       type: 'ADD'
@@ -29,4 +23,4 @@ export type Action =
       index: number
     }
 
-export type DispatchTEST = ({}: Action) => void
+export type DispatchContext = ({}: Action) => void

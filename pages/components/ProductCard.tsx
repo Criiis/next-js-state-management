@@ -2,14 +2,14 @@ import Link from 'next/link'
 import styles from '../../styles/components/ProductCard.module.scss'
 import productsDataTypes from './products'
 import { useDispatchCart } from '../helper/CartProvider'
-import contextProducts, {DispatchTEST} from '../helper/CartProvider.d'
+import contextProducts, {DispatchContext} from '../helper/CartProvider.d'
 
 export default function ProductCard({
   el,
 }: {
   el: productsDataTypes
 }): JSX.Element {
-  const dispatch: DispatchTEST = useDispatchCart() //https://stackoverflow.com/questions/54844839/typescript-how-to-type-the-dispatch-in-redux check the types
+  const dispatch: DispatchContext = useDispatchCart() //https://stackoverflow.com/questions/54844839/typescript-how-to-type-the-dispatch-in-redux check the types
   const addToCart = (item: contextProducts): void => {
     dispatch({ type: 'ADD', item })
   }
