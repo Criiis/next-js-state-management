@@ -1,12 +1,13 @@
 //use context cart
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useEffect } from 'react'
 import contextProducts, { Action, DispatchContext } from './CartProvider.d'
-import { updateLocalStorageCart } from './test'
+import { useSetLocalStorage } from './localStorage'
 
-//check the initial state (should get it from local storage)
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
 const CartDispatchContext = createContext({} as DispatchContext)
 const CartContextState = createContext([] as [] | contextProducts[])
+
+const cartStorage: string = 'cartStorage' // <- localStorage key
 
 const reducer = (
   state: [] | contextProducts[],
@@ -14,11 +15,8 @@ const reducer = (
 ): [] | contextProducts[] => {
   switch (action.type) {
     case 'ADD':
-      updateLocalStorageCart()
-      ////update local storage
       return [...state, action.item]
     case 'REMOVE':
-      //update local storage
       const cartProducts: [] | contextProducts[] = [...state]
       cartProducts.splice(action.index, 1)
       return cartProducts
@@ -29,7 +27,13 @@ const reducer = (
 
 //why reactNode? https://stackoverflow.com/questions/58123398/when-to-use-jsx-element-vs-reactnode-vs-reactelement/59840095#59840095
 const CartProvider = ({ children }: { children?: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, [])
+  const [localStorage, setLocalStorage] = useSetLocalStorage(cartStorage, [])
+  const [state, dispatch] = useReducer(reducer, localStorage)
+
+  useEffect(() => {
+    setLocalStorage(state)
+  }, [state, localStorage])
+
   return (
     <CartDispatchContext.Provider value={dispatch}>
       <CartContextState.Provider value={state}>
