@@ -5,7 +5,7 @@ import { useSetLocalStorage } from './localStorage'
 
 //https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
 const CartDispatchContext = createContext({} as DispatchContext)
-const CartContextState = createContext([] as [] | contextProducts[])
+const CartContextState = createContext([] as any)
 
 const cartStorage: string = 'cartStorage' // <- localStorage key
 
@@ -30,13 +30,21 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   const [localStorage, setLocalStorage] = useSetLocalStorage(cartStorage, [])
   const [state, dispatch] = useReducer(reducer, localStorage)
 
+
+
+  const test = (item: contextProducts, quantity = 1) => {
+    console.log(item)
+    console.log(quantity)
+    console.log(state)
+  }
+
   useEffect(() => {
     setLocalStorage(state)
   }, [state, localStorage])
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
-      <CartContextState.Provider value={state}>
+      <CartContextState.Provider value={{ ...state, test }}>
         {children}
       </CartContextState.Provider>
     </CartDispatchContext.Provider>
@@ -46,3 +54,8 @@ export default CartProvider
 
 export const useCart = () => useContext(CartContextState)
 export const useDispatchCart = () => useContext(CartDispatchContext)
+
+// const dispatch: DispatchContext = useDispatchCart()
+// const addToCart = (item: contextProducts): void => {
+//   dispatch({ type: 'ADD', item })
+// }
