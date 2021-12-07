@@ -1,23 +1,25 @@
 //use context cart
 import { createContext, useContext, useReducer, useEffect } from 'react'
-import contextProducts, { Action, DispatchContext } from './CartProvider.d'
+import {
+  contextProducts,
+  Action,
+  DispatchContext,
+  contextTypes,
+  stateType,
+} from './CartProvider.d'
 import { useSetLocalStorage } from './localStorage'
 
-//https://stackoverflow.com/questions/54577865/react-createcontext-issue-in-typescript doc
 const CartDispatchContext = createContext({} as DispatchContext)
-const CartContextState = createContext([] as any)
+const CartContextState = createContext({} as contextTypes)
 
 const cartStorage: string = 'cartStorage' // <- localStorage key
 
-const reducer = (
-  state: [] | contextProducts[],
-  action: Action
-): [] | contextProducts[] => {
+const reducer = (state: stateType, action: Action): stateType => {
   switch (action.type) {
     case 'ADD':
       return [...state, action.item]
     case 'REMOVE':
-      const cartProducts: [] | contextProducts[] = [...state]
+      const cartProducts: stateType = [...state]
       cartProducts.splice(action.index, 1)
       return cartProducts
     default:
@@ -25,17 +27,19 @@ const reducer = (
   }
 }
 
-//why reactNode? https://stackoverflow.com/questions/58123398/when-to-use-jsx-element-vs-reactnode-vs-reactelement/59840095#59840095
 const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   const [localStorage, setLocalStorage] = useSetLocalStorage(cartStorage, [])
   const [state, dispatch] = useReducer(reducer, localStorage)
 
-
-
-  const test = (item: contextProducts, quantity = 1) => {
-    console.log(item)
+  //function to add items -> passing from CartContextState/useCart
+  const addItem = (item: contextProducts, quantity = 1) => {
     console.log(quantity)
-    console.log(state)
+    dispatch({ type: 'ADD', item })
+  }
+
+  //function to remove items -> passing from CartContextState/useCart
+  const removeItem = (index: number) => {
+    dispatch({ type: 'REMOVE', index })
   }
 
   useEffect(() => {
@@ -44,7 +48,8 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
-      <CartContextState.Provider value={{ ...state, test }}>
+      <CartContextState.Provider value={{ state, addItem, removeItem }}>
+        {/*state will be the items and addItem will be the function | it will pass all to "useCart" as an object*/}
         {children}
       </CartContextState.Provider>
     </CartDispatchContext.Provider>
@@ -54,8 +59,3 @@ export default CartProvider
 
 export const useCart = () => useContext(CartContextState)
 export const useDispatchCart = () => useContext(CartDispatchContext)
-
-// const dispatch: DispatchContext = useDispatchCart()
-// const addToCart = (item: contextProducts): void => {
-//   dispatch({ type: 'ADD', item })
-// }
