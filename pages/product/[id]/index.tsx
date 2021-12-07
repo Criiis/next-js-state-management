@@ -1,16 +1,12 @@
 import productsDataTypes from '../../components/products'
-import { useDispatchCart } from '../../helper/CartProvider'
-import contextProducts, { DispatchTEST } from '../../helper/CartProvider.d'
+import { useCart } from '../../helper/CartProvider'
 
 function singleProduct({
   product,
 }: {
   product: productsDataTypes
 }): JSX.Element {
-  const dispatch: DispatchTEST = useDispatchCart() //https://stackoverflow.com/questions/54844839/typescript-how-to-type-the-dispatch-in-redux check the types
-  const addToCart = (item: contextProducts): void => {
-    dispatch({ type: 'ADD', item })
-  }
+  const { addItem } = useCart()
 
   return (
     <div>
@@ -24,7 +20,7 @@ function singleProduct({
       />
       <h5>{product?.price} £</h5>
 
-      <button onClick={() => addToCart(product)}>Add to cart</button>
+      <button onClick={() => addItem(product, 1)}>Add to cart</button>
     </div>
   )
 }
