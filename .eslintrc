@@ -22,6 +22,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-console": [1, { "allow": ["warn", "error", "info"] }],
     "react/jsx-uses-react": "error",   
     "react/jsx-uses-vars": "error" ,
     "no-unused-vars": 0,
