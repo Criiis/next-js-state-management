@@ -16,15 +16,16 @@ interface rating {
 //state types
 export type stateType = contextProducts[] | []
 //type for dispatch
-export type DispatchContext = ({}: Action) => void
+export type dispatchContext = ({}: Action) => void
 //type for CartContextState / useCart()
 export interface contextTypes {
   state: stateType
   addItem: (item: contextProducts, quantity: number) => void
   removeItem: (index: number) => void
 }
-//actions type
-export type Action =
+
+//actions type on reducer switch statement
+export type action =
   | {
       type: 'ADD'
       item: contextProducts
@@ -33,3 +34,9 @@ export type Action =
       type: 'REMOVE'
       index: number
     }
+
+//global action
+export interface globalAction {
+  ADD: 'ADD'
+  REMOVE: 'REMOVE'
+}

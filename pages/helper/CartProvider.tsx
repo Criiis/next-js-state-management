@@ -2,23 +2,30 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 import {
   contextProducts,
-  Action,
-  DispatchContext,
+  action,
+  dispatchContext,
   contextTypes,
   stateType,
+  globalAction,
 } from './CartProvider.d'
 import { useSetLocalStorage } from './localStorage'
 
-const CartDispatchContext = createContext({} as DispatchContext)
+const ACTIONS: globalAction = {
+  //HAVE TO CREATE A TYPE FOR THIS
+  ADD: 'ADD',
+  REMOVE: 'REMOVE',
+}
+
+const CartDispatchContext = createContext({} as dispatchContext)
 const CartContextState = createContext({} as contextTypes)
 
 const cartStorage: string = 'cartStorage' // <- localStorage key
 
-const reducer = (state: stateType, action: Action): stateType => {
+const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
-    case 'ADD':
+    case ACTIONS.ADD:
       return [...state, action.item]
-    case 'REMOVE':
+    case ACTIONS.REMOVE:
       const cartProducts: stateType = [...state]
       cartProducts.splice(action.index, 1)
       return cartProducts
@@ -34,12 +41,12 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   //function to add items -> passing from CartContextState/useCart
   const addItem = (item: contextProducts, quantity = 1) => {
     console.log(quantity)
-    dispatch({ type: 'ADD', item })
+    dispatch({ type: ACTIONS.ADD, item })
   }
 
   //function to remove items -> passing from CartContextState/useCart
   const removeItem = (index: number) => {
-    dispatch({ type: 'REMOVE', index })
+    dispatch({ type: ACTIONS.REMOVE, index })
   }
 
   useEffect(() => {
