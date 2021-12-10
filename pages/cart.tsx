@@ -9,7 +9,7 @@ const Cart: NextPage = () => {
   return (
     <>
       <h1>cart page</h1>
-      <h2>what can do?!</h2>
+      {state.length <= 0 ? <h2>cart empty</h2> : ``}
       {state.map((el: contextProducts, i: number) => (
         <div key={i}>
           <img loading='lazy' src={el.image} alt={el.title} width='150px' />
