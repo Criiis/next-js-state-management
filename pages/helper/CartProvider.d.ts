@@ -7,6 +7,7 @@ export interface contextProducts {
   price: number
   rating: rating
   title: string
+  quantity?: number
 }
 //rating for products
 interface rating {
@@ -28,7 +29,8 @@ export interface contextTypes {
 export type action =
   | {
       type: 'ADD'
-      item: contextProducts
+      id: contextProducts['id']
+      payload: contextProducts
     }
   | {
       type: 'REMOVE'
