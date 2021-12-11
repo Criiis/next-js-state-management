@@ -4,6 +4,8 @@ import { useCart } from '../helper/CartProvider'
 export default function Menu(): JSX.Element {
   const { state } = useCart()
 
+  console.log(state)
+
   return (
     <ul>
       <li>
@@ -18,7 +20,7 @@ export default function Menu(): JSX.Element {
       </li>
       <li>
         <Link href='/cart'>
-          <a>cart {state.length}</a>
+          <a>cart {'number of state'}</a>
         </Link>
       </li>
     </ul>
