@@ -8,6 +8,7 @@ import {
   stateType,
   globalAction,
 } from './CartProvider.d'
+import productsDataTypes from '../components/products.d'
 import { useSetLocalStorage } from './localStorage'
 
 const ACTIONS: globalAction = {
@@ -24,7 +25,15 @@ const cartStorage: string = 'cartStorage' // <- localStorage key
 const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
     case ACTIONS.ADD:
-      return [...state, action.item]
+      //function to map and change the current product || and filter the false
+      const productAdded: (false | contextProducts)[] = state
+        .map((el) => {
+          if (el?.id === action.id) return false
+          return el
+        })
+        .filter((el: contextProducts | false) => el instanceof Object)
+
+      return [...productAdded, action.payload] as stateType //return this as object of all items, total price, total items in cart 
     case ACTIONS.REMOVE:
       const cartProducts: stateType = [...state]
       cartProducts.splice(action.index, 1)
@@ -40,8 +49,14 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
 
   //function to add items -> passing from CartContextState/useCart
   const addItem = (item: contextProducts, quantity = 1) => {
-    console.log(quantity)
-    dispatch({ type: ACTIONS.ADD, item })
+    //item + qty
+    const payload: contextProducts = { ...item, quantity }
+    //check if the product exist on state
+    const stateItem = state.find((el: contextProducts) => el.id === payload.id)
+    //if product exist in the state get the quantity and add the new quantity to payload
+    if (stateItem) payload.quantity = quantity + stateItem?.quantity!
+    // return the action, id of the item and payload
+    dispatch({ type: ACTIONS.ADD, id: payload.id, payload })
   }
 
   //function to remove items -> passing from CartContextState/useCart
