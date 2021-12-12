@@ -14,7 +14,7 @@ export default function ProductCard({
     <div className={styles.singleProduct}>
       <img loading='lazy' src={el.image} alt={el.title} />
       <p>{el.title}</p>
-      <p>{el.price}</p>
+      <p>{el.price} £</p>
       <button onClick={() => addItem(el, 1)}>Add to cart</button>
       <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
