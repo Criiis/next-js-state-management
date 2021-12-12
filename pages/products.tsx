@@ -10,13 +10,11 @@ interface Props {
 
 //page
 const Products: NextPage<Props> = ({ data }) => {
-  return (
-    <div className={styles.productContainer}>
-      {data?.map((el: productsDataTypes) => (
-        <ProductCard el={el} key={el.id} />
-      ))}
-    </div>
-  )
+  const singleProduct = data?.map((el: productsDataTypes) => (
+    <ProductCard el={el} key={el.id} />
+  ))
+
+  return <div className={styles.productContainer}>{singleProduct}</div>
 }
 
 //All products server side render
