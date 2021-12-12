@@ -4,7 +4,7 @@ import { useCart } from './helper/CartProvider'
 import { contextProducts } from './helper/CartProvider.d'
 
 const Cart: NextPage = () => {
-  const { state, removeItem } = useCart()
+  const { state, removeItem, totalProductValue } = useCart()
 
   return (
     <>
@@ -13,10 +13,10 @@ const Cart: NextPage = () => {
       {state.map((el: contextProducts, i: number) => (
         <div key={i}>
           <img loading='lazy' src={el.image} alt={el.title} width='150px' />
+          <p>{el.title}</p>
           <p>
-            {el.title} | qty.{el?.quantity}
+            {el.price} £ | qty.{el?.quantity}
           </p>
-          <p>{el.price} £</p>
           <button onClick={() => removeItem(i)}>remove from cart</button>
           <br />
           <Link href='/product/[id]' as={`/product/${el.id}`}>
@@ -24,6 +24,7 @@ const Cart: NextPage = () => {
           </Link>
         </div>
       ))}
+      <p>total: {totalProductValue()} £</p>
     </>
   )
 }
