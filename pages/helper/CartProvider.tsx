@@ -63,9 +63,9 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
     dispatch({ type: ACTIONS.REMOVE, index })
   }
 
-  //total number of products ->  reducer has a bug in typescript > https://www.sitepoint.com/community/t/typescript-and-array-reduce/369685/4
+  //total number of products
   const totalItemsCart = (): number =>
-    (state as any)?.reduce(
+    (state as contextProducts[])?.reduce(
       (total: number, obj: contextProducts): number => obj?.quantity! + total,
       0
     )
@@ -73,7 +73,7 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   //total price of all products ->
   const totalProductValue = (): number =>
     parseFloat(
-      (state as any)
+      (state as contextProducts[])
         ?.reduce(
           (total: number, obj: contextProducts) =>
             obj?.price * obj?.quantity! + total,
