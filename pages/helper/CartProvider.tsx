@@ -32,8 +32,7 @@ const reducer = (state: stateType, action: action): stateType => {
           return el
         })
         .filter((el: contextProducts | false) => el instanceof Object)
-
-      return [...productAdded, action.payload] as stateType //return this as object of all items, total price, total items in cart 
+      return [...productAdded, action.payload] as stateType //return this as object of all items, total price, total items in cart
     case ACTIONS.REMOVE:
       const cartProducts: stateType = [...state]
       cartProducts.splice(action.index, 1)
@@ -64,13 +63,40 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
     dispatch({ type: ACTIONS.REMOVE, index })
   }
 
+  //total number of products ->  reducer has a bug in typescript > https://www.sitepoint.com/community/t/typescript-and-array-reduce/369685/4
+  const totalItemsCart = (): number =>
+    (state as any)?.reduce(
+      (total: number, obj: contextProducts): number => obj?.quantity! + total,
+      0
+    )
+
+  //total price of all products ->
+  const totalProductValue = (): number =>
+    parseFloat(
+      (state as any)
+        ?.reduce(
+          (total: number, obj: contextProducts) =>
+            obj?.price * obj?.quantity! + total,
+          0
+        )
+        .toFixed(2)
+    )
+
   useEffect(() => {
     setLocalStorage(state)
   }, [state, localStorage])
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
-      <CartContextState.Provider value={{ state, addItem, removeItem }}>
+      <CartContextState.Provider
+        value={{
+          state,
+          addItem,
+          removeItem,
+          totalItemsCart,
+          totalProductValue,
+        }}
+      >
         {/*state will be the items and addItem will be the function | it will pass all to "useCart" as an object*/}
         {children}
       </CartContextState.Provider>

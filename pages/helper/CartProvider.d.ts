@@ -23,6 +23,8 @@ export interface contextTypes {
   state: stateType
   addItem: (item: contextProducts, quantity: number) => void
   removeItem: (index: number) => void
+  totalItemsCart: () => number
+  totalProductValue: () => number
 }
 
 //actions type on reducer switch statement
