@@ -22,7 +22,9 @@ export type dispatchContext = ({}: Action) => void
 export interface contextTypes {
   state: stateType
   addItem: (item: contextProducts, quantity: number) => void
-  removeItem: (index: number) => void
+  removeItem: (payload: contextProducts) => void
+  addSingleQuantity: (payload: contextProducts) => void
+  removeSingleQuantity: (payload: contextProducts) => void
   totalItemsCart: () => number
   totalProductValue: () => number
 }
@@ -36,11 +38,21 @@ export type action =
     }
   | {
       type: 'REMOVE'
-      index: number
+      id: contextProducts['id']
+    }
+  | {
+      type: 'ADDSINGLE'
+      payload: contextProducts
+    }
+  | {
+      type: 'REMOVESINGLE'
+      payload: contextProducts
     }
 
 //global action
 export interface globalAction {
   ADD: 'ADD'
   REMOVE: 'REMOVE'
+  ADDSINGLE: 'ADDSINGLE'
+  REMOVESINGLE: 'REMOVESINGLE'
 }
