@@ -20,6 +20,11 @@ export default function Menu(): JSX.Element {
           <a>cart {totalItemsCart()}</a>
         </Link>
       </li>
+      <li>
+        <Link href='/saved-items'>
+          <a>Saved Items X</a>
+        </Link>
+      </li>
     </ul>
   )
 }

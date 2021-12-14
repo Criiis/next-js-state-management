@@ -21,6 +21,8 @@ function singleProduct({
       <h5>{product?.price} £</h5>
 
       <button onClick={() => addItem(product, 1)}>Add to cart</button>
+      <br />
+      <button>Add to saved items</button>
     </div>
   )
 }

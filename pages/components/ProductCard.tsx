@@ -17,6 +17,8 @@ export default function ProductCard({
       <p>{el.price} £</p>
       <button onClick={() => addItem(el, 1)}>Add to cart</button>
       <br />
+      <button>Add to saved items</button>
+      <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
         <a>See product</a>
       </Link>

@@ -25,6 +25,8 @@ const Cart: NextPage = () => {
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />
+      <button>move to saved items</button>
+      <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
         <a>See product</a>
       </Link>
