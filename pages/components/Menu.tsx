@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useCart } from '../helper/CartProvider'
+import { useSavedItems } from '../helper/SavedItemsProvider'
 
 export default function Menu(): JSX.Element {
   const { totalItemsCart } = useCart()
+  const { state } = useSavedItems()
   return (
     <ul>
       <li>
@@ -22,7 +24,7 @@ export default function Menu(): JSX.Element {
       </li>
       <li>
         <Link href='/saved-items'>
-          <a>Saved Items X</a>
+          <a>Saved Items {state.length}</a>
         </Link>
       </li>
     </ul>

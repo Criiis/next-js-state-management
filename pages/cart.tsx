@@ -3,6 +3,11 @@ import Link from 'next/dist/client/link'
 import { useCart } from './helper/CartProvider'
 import { contextProducts } from './helper/CartProvider.d'
 
+import {
+  useSavedItems,
+  useDispatchSavedItems,
+} from './helper/SavedItemsProvider'
+
 const Cart: NextPage = () => {
   const {
     state,
@@ -11,6 +16,8 @@ const Cart: NextPage = () => {
     addSingleQuantity,
     removeSingleQuantity,
   } = useCart()
+
+  const { addSavedItem } = useSavedItems()
 
   const singleCartProducts = state.map((el: contextProducts, i: number) => (
     <div key={i}>
@@ -25,7 +32,7 @@ const Cart: NextPage = () => {
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />
-      <button>move to saved items</button>
+      <button onClick={() => addSavedItem(el)}>move to saved items</button>
       <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
         <a>See product</a>
