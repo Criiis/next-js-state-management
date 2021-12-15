@@ -20,8 +20,10 @@ const ACTIONS: globalAction = {
 const CartDispatchContext = createContext({} as dispatchContext)
 const CartContextState = createContext({} as contextTypes)
 
-const cartStorage: string = 'cartStorage' // <- localStorage key
+// localStorage key
+const cartStorage: string = 'cartStorage'
 
+//reducer funcionality
 const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
     case ACTIONS.ADD:
@@ -45,9 +47,16 @@ const reducer = (state: stateType, action: action): stateType => {
   }
 }
 
+//component
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [localStorage, setLocalStorage] = useSetLocalStorage(cartStorage, [])
-  const [state, dispatch] = useReducer(reducer, localStorage)
+  const [localStorage, setLocalStorage] = useSetLocalStorage(cartStorage, []) //local storage initial state
+  const [state, dispatch] = useReducer(reducer, localStorage) //local storage initial state
+
+  // dispatch({ type: ACTIONS.INITIAL STATE, id: payload.id, payload })
+
+  useEffect(() => {
+    setLocalStorage(state) // update the local storage
+  }, [state, localStorage])
 
   //function to add items -> passing from CartContextState/useCart
   const addItem = (item: contextProducts, quantity = 1) => {
@@ -95,12 +104,9 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
         .toFixed(2)
     )
 
-  useEffect(() => {
-    setLocalStorage(state)
-  }, [state, localStorage])
-
   return (
     <CartDispatchContext.Provider value={dispatch}>
+      {/* handle the data and update the reducer passing all to the CartContextState */}
       <CartContextState.Provider
         value={{
           state,
@@ -112,6 +118,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
           totalProductValue,
         }}
       >
+        {/*this useContext (useCart) is the one passing the value to all application*/}
         {children}
       </CartContextState.Provider>
     </CartDispatchContext.Provider>
@@ -119,5 +126,5 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 }
 export default CartProvider
 
-export const useCart = () => useContext(CartContextState)
 export const useDispatchCart = () => useContext(CartDispatchContext)
+export const useCart = () => useContext(CartContextState)
