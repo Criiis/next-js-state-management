@@ -19,6 +19,7 @@ const Cart: NextPage = () => {
 
   const { addSavedItem } = useSavedItems()
 
+  //structure for the single item in the cart
   const singleCartProducts = state.map((el: contextProducts, i: number) => (
     <div key={i}>
       <img loading='lazy' src={el.image} alt={el.title} width='150px' />
@@ -32,7 +33,14 @@ const Cart: NextPage = () => {
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />
-      <button onClick={() => addSavedItem(el)}>move to saved items</button>
+      <button
+        onClick={() => {
+          addSavedItem(el)
+          removeItem(el)
+        }}
+      >
+        move to saved items
+      </button>
       <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
         <a>See product</a>
