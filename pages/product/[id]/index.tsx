@@ -1,12 +1,14 @@
 import productsDataTypes from '../../components/products'
 import { useCart } from '../../helper/CartProvider'
+import { useSavedItems } from '../../helper/SavedItemsProvider'
 
-function singleProduct({
+function SingleProduct({
   product,
 }: {
   product: productsDataTypes
 }): JSX.Element {
   const { addItem } = useCart()
+  const { state, addSavedItem, removedSavedItem } = useSavedItems()
 
   return (
     <div>
@@ -19,10 +21,17 @@ function singleProduct({
         loading='lazy'
       />
       <h5>{product?.price} £</h5>
-
       <button onClick={() => addItem(product, 1)}>Add to cart</button>
       <br />
-      <button>Add to saved items</button>
+      {state.findIndex((el: any) => el.id === product.id) === -1 ? (
+        <button onClick={() => addSavedItem(product)}>
+          Add to saved items
+        </button>
+      ) : (
+        <button onClick={() => removedSavedItem(product)}>
+          remove from saved items
+        </button>
+      )}
     </div>
   )
 }
@@ -63,4 +72,4 @@ export async function getStaticProps({ params }: paths): Promise<{
   return { props: { product } }
 }
 
-export default singleProduct
+export default SingleProduct
