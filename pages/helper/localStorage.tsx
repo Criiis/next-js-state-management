@@ -28,7 +28,7 @@ export const useSetLocalStorage = (
       //3.set item in the local storage
       localStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
