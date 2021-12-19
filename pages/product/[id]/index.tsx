@@ -23,7 +23,8 @@ function SingleProduct({
       <h5>{product?.price} £</h5>
       <button onClick={() => addItem(product, 1)}>Add to cart</button>
       <br />
-      {state.findIndex((el: any) => el.id === product.id) === -1 ? (
+      {state.findIndex((el: productsDataTypes) => el.id === product.id) ===
+      -1 ? (
         <button onClick={() => addSavedItem(product)}>
           Add to saved items
         </button>
