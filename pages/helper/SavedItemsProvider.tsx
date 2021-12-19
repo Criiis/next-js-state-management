@@ -1,21 +1,24 @@
-import { createContext, useContext, useReducer, useEffect } from 'react'
+import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import { useSetLocalStorage } from './localStorage'
+import { contextProducts } from './CartProvider.d'
+import { stateType } from './SavedItemsProvider.d'
 
 const savedItemsStorage = 'savedItems'
 const SavedItemsDispatchContext = createContext({} as any)
-const SavedItemsContextState = createContext({} as any)
+const SavedItemsContextState = createContext({} as any) //passed in the  value of SavedItemsContextState.Provider
 
-const reducer = (state: any, action: any): any => {
+const reducer = (state: stateType, action: any): stateType => {
   switch (action.type) {
     case 'ADD':
-      return [...state, action.payload]
-    case 'REMOVE':
-      const cartProducts: any = [...state]
+      return [action.payload, ...state]
+    case 'REMOVE': {
+      const cartProducts: stateType = [...state]
       const removeIndex: number = cartProducts.findIndex(
-        (el: any) => el.id === action.id
+        (el: contextProducts) => el.id === action.id
       )
       cartProducts.splice(removeIndex, 1)
       return [...cartProducts]
+    }
     default:
       throw new Error(`couldn't ${action}`)
   }
@@ -32,14 +35,13 @@ const SavedItemsProvider = ({ children }: { children: React.ReactNode }) => {
     setLocalStorage(state)
   }, [state, localStorage])
 
-  const addSavedItem = (payload: any): any => {
+  const addSavedItem = (payload: contextProducts): void => {
     dispatch({ type: 'ADD', payload }) // return the action, id of the item and payload
   }
 
-  const removedSavedItem = (payload: any): any => {
+  const removedSavedItem = (payload: contextProducts): void => {
     dispatch({ type: 'REMOVE', payload, id: payload.id }) // return the action, id of the item and payload
   }
-  console.log(state)
 
   return (
     <SavedItemsDispatchContext.Provider value={dispatch}>
