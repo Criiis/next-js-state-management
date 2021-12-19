@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import productsDataTypes from './components/products'
 import Link from 'next/link'
 import { useSavedItems } from './helper/SavedItemsProvider'
 import { useCart } from './helper/CartProvider'
@@ -11,7 +12,7 @@ const SavedItems: NextPage = () => {
       <h1>My saved Items</h1>
       {!state.length && `Saved items is empty`}
 
-      {state.map((el: any, i: number) => (
+      {state.map((el: productsDataTypes, i: number) => (
         <div key={i}>
           <img loading='lazy' src={el.image} alt={el.title} width='150px' />
           <p>{el.title}</p>

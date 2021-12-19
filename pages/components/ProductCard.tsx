@@ -19,7 +19,7 @@ export default function ProductCard({
       <p>{el.price} £</p>
       <button onClick={() => addItem(el, 1)}>Add to cart</button>
       <br />
-      {state.findIndex((e: any) => e.id === el.id) === -1 ? (
+      {state.findIndex((e: productsDataTypes) => e.id === el.id) === -1 ? (
         <button onClick={() => addSavedItem(el)}>Add to saved items</button>
       ) : (
         <button onClick={() => removedSavedItem(el)}>

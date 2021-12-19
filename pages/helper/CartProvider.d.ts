@@ -17,7 +17,7 @@ interface rating {
 //state types
 export type stateType = contextProducts[] | []
 //type for dispatch
-export type dispatchContext = ({}: Action) => void
+export type dispatchContext = (_: action) => void // why "_" as a paramenter? https://stackoverflow.com/questions/57609358/getting-linting-error-error-unexpected-empty-object-pattern-no-empty-pattern 
 //type for CartContextState / useCart()
 export interface contextTypes {
   state: stateType

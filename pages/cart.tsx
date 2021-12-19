@@ -29,7 +29,7 @@ const Cart: NextPage = () => {
       <span> Qty. {el?.quantity} </span>
       {el?.quantity! > 1 && (
         <button onClick={() => removeSingleQuantity(el)}>-</button>
-      )}{' '}
+      )}
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />

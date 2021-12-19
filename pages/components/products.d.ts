@@ -6,6 +6,7 @@ export default interface productsDataTypes {
   price: number
   rating: rating
   title: string
+  quantity?: number
 }
 
 interface rating {
