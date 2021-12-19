@@ -1,5 +1,5 @@
 //use context cart
-import { createContext, useContext, useReducer, useEffect } from 'react'
+import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {
   contextProducts,
   action,
@@ -26,18 +26,20 @@ const cartStorage: string = 'cartStorage'
 //reducer funcionality
 const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
-    case ACTIONS.ADD:
+    case ACTIONS.ADD: {
       const addIndex: number = state.findIndex((el) => el.id === action.id)
       if (addIndex === -1) return [...state, action.payload]
       state.splice(addIndex, 1)
       return [...state, action.payload]
-    case ACTIONS.REMOVE:
+    }
+    case ACTIONS.REMOVE: {
       const cartProducts: stateType = [...state]
       const removeIndex: number = cartProducts.findIndex(
         (el) => el.id === action.id
       )
       cartProducts.splice(removeIndex, 1)
       return [...cartProducts]
+    }
     case ACTIONS.ADDSINGLE:
       return [...state]
     case ACTIONS.REMOVESINGLE:
