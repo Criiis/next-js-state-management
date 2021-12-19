@@ -30,5 +30,8 @@
     "no-undef": 2,
     "@typescript-eslint/no-extra-semi": "off",
     "@typescript-eslint/no-inferrable-types": "off"
+  },
+  "globals": {
+    "JSX": true
   }
 }
