@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { stateType } from './CartProvider.d'
 
+type CallbackFunction = (a: stateType) => stateType | void
+
 export const useSetLocalStorage = (
   key: string,
   initialValue: [] | string
-): [stateType, Function] => {
+): [stateType, CallbackFunction] => {
   //getting initial value of cart products
   const [getLocalStorage, setGetLocalStorage] = useState<stateType>(() => {
     try {
@@ -18,13 +20,13 @@ export const useSetLocalStorage = (
   })
 
   //set value in local storage
-  const setValue = (value: stateType | Function) => {
+  const setValue = (value: stateType | CallbackFunction): void => {
     try {
       //1.check if the 'value parameter' is a function or just a value
       const valueToStore =
         value instanceof Function ? value(getLocalStorage) : value
       //2.update the setGetLocalStorage with the 'value parameter'
-      setGetLocalStorage(valueToStore)
+      setGetLocalStorage(valueToStore as stateType)
       //3.set item in the local storage
       localStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
