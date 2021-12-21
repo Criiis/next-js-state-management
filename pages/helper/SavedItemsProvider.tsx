@@ -1,17 +1,28 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import { useSetLocalStorage } from './localStorage'
 import { contextProducts } from './CartProvider.d'
-import { stateType } from './SavedItemsProvider.d'
+import {
+  action,
+  stateType,
+  dispatchContext,
+  contextTypes,
+  globalAction,
+} from './SavedItemsProvider.d'
 
 const savedItemsStorage = 'savedItems'
-const SavedItemsDispatchContext = createContext({} as any)
-const SavedItemsContextState = createContext({} as any) //passed in the  value of SavedItemsContextState.Provider
+const ACTIONS: globalAction = {
+  ADD: 'ADD',
+  REMOVE: 'REMOVE',
+}
 
-const reducer = (state: stateType, action: any): stateType => {
+const SavedItemsDispatchContext = createContext({} as dispatchContext)
+const SavedItemsContextState = createContext({} as contextTypes) //passed in the  value of SavedItemsContextState.Provider
+
+const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
-    case 'ADD':
+    case ACTIONS.ADD:
       return [action.payload, ...state]
-    case 'REMOVE': {
+    case ACTIONS.REMOVE: {
       const cartProducts: stateType = [...state]
       const removeIndex: number = cartProducts.findIndex(
         (el: contextProducts) => el.id === action.id
@@ -31,16 +42,19 @@ const SavedItemsProvider = ({ children }: { children: React.ReactNode }) => {
   )
   const [state, dispatch] = useReducer(reducer, localStorage)
 
+  //update the local storage
   useEffect(() => {
     setLocalStorage(state)
   }, [state, localStorage])
 
+  //add Saved Item functionality
   const addSavedItem = (payload: contextProducts): void => {
-    dispatch({ type: 'ADD', payload }) // return the action, id of the item and payload
+    dispatch({ type: ACTIONS.ADD, payload }) // return the action, id of the item and payload
   }
 
+  //remove Saved Item functionality
   const removedSavedItem = (payload: contextProducts): void => {
-    dispatch({ type: 'REMOVE', payload, id: payload.id }) // return the action, id of the item and payload
+    dispatch({ type: ACTIONS.REMOVE, payload, id: payload.id }) // return the action, id of the item and payload
   }
 
   return (
