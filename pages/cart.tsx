@@ -33,25 +33,32 @@ const Cart: NextPage = () => {
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />
-      <button
-        onClick={() => {
-          addSavedItem(el)
-          removeItem(el)
-        }}
-      >
-        move to saved items
-      </button>
+
+      {useSavedItems().state.find(
+        //review this line of code
+        (element: contextProducts) => element.id === el.id
+      ) ? null : (
+        <button
+          onClick={() => {
+            addSavedItem(el)
+            removeItem(el)
+          }}
+        >
+          move to saved items
+        </button>
+      )}
       <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
         <a>See product</a>
       </Link>
+      <hr />
     </div>
   ))
 
   return (
     <>
       <h1>cart page</h1>
-      {state.length <= 0 && <h2>cart empty</h2>}
+      {!state.length ? <h2>cart empty</h2> : null}
       {singleCartProducts}
       <p>total: {totalProductValue()} £</p>
     </>
