@@ -15,6 +15,7 @@ const Cart: NextPage = () => {
   } = useCart()
 
   const { addSavedItem } = useSavedItems()
+  const savedItemsState = useSavedItems().state
 
   //structure for the single item in the cart
   const singleCartProducts = state.map((el: contextProducts, i: number) => (
@@ -44,7 +45,7 @@ const Cart: NextPage = () => {
       <button onClick={() => removeItem(el)}>remove from cart</button>
       <br />
 
-      {useSavedItems().state.find(
+      {savedItemsState.find(
         //review this line of code
         (element: contextProducts) => element.id === el.id
       ) ? null : (
