@@ -28,9 +28,9 @@ const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
     case ACTIONS.ADD: {
       const addIndex: number = state.findIndex((el) => el.id === action.id)
-      if (addIndex === -1) return [...state, action.payload]
+      if (addIndex === -1) return [action.payload, ...state]
       state.splice(addIndex, 1)
-      return [...state, action.payload]
+      return [action.payload, ...state]
     }
     case ACTIONS.REMOVE: {
       const cartProducts: stateType = [...state]
