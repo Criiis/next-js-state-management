@@ -10,7 +10,7 @@ const SavedItems: NextPage = () => {
   return (
     <>
       <h1>My saved Items</h1>
-      {!state.length && `Saved items is empty`}
+      {!state.length ? <h2>Saved items is empty</h2> : null}
 
       {state.map((el: productsDataTypes, i: number) => (
         <div key={i}>
@@ -33,6 +33,7 @@ const SavedItems: NextPage = () => {
           <Link href='/product/[id]' as={`/product/${el.id}`}>
             <a>See product</a>
           </Link>
+          <hr />
         </div>
       ))}
     </>
