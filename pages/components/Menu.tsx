@@ -6,7 +6,7 @@ export default function Menu(): JSX.Element {
   const { totalItemsCart } = useCart()
   const { state } = useSavedItems()
   return (
-    <ul>
+    <nav className='header-nav'>
       <li>
         <Link href='/'>
           <a>Home</a>
@@ -27,6 +27,6 @@ export default function Menu(): JSX.Element {
           <a>Saved Items {state.length}</a>
         </Link>
       </li>
-    </ul>
+    </nav>
   )
 }
