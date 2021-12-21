@@ -18,10 +18,7 @@ export type dispatchContext = (_: action) => void
 export interface contextTypes {
   state: stateType
   addSavedItem: (payload: contextProducts) => void
-  removedSavedItem: (
-    payload: contextProducts,
-    id: contextProducts['id']
-  ) => void
+  removedSavedItem: (payload: contextProducts) => void
 }
 
 export interface globalAction {
