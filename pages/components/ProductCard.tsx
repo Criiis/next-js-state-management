@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '../../styles/components/ProductCard.module.scss'
 import productsDataTypes from './products'
 import { useCart } from '../helper/CartProvider'
@@ -14,7 +15,21 @@ export default function ProductCard({
 
   return (
     <div className={styles.singleProduct}>
-      <img loading='lazy' src={el.image} alt={el.title} />
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '200px',
+        }}
+      >
+        <Image
+          alt={el.title}
+          src={el.image}
+          layout='fill'
+          objectFit='contain' // Scale your image down to fit into the container
+        />
+      </div>
+      {/* <img loading='lazy' src={el.image} alt={el.title} /> */}
       <p>{el.title}</p>
       <p>{el.price} £</p>
       <button onClick={() => addItem(el, 1)}>Add to cart</button>

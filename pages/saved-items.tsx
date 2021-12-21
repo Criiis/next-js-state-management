@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
-import productsDataTypes from './components/products'
+import Image from 'next/image'
 import Link from 'next/link'
+import productsDataTypes from './components/products'
 import { useSavedItems } from './helper/SavedItemsProvider'
 import { useCart } from './helper/CartProvider'
 
@@ -14,7 +15,21 @@ const SavedItems: NextPage = () => {
 
       {state.map((el: productsDataTypes, i: number) => (
         <div key={i}>
-          <img loading='lazy' src={el.image} alt={el.title} width='150px' />
+          <div
+            style={{
+              position: 'relative',
+              width: '150px',
+              paddingBottom: '20%',
+            }}
+          >
+            <Image
+              alt={el.title}
+              src={el.image}
+              layout='fill'
+              objectFit='contain' // Scale your image down to fit into the container
+            />
+          </div>
+
           <p>{el.title}</p>
           <p>{el.price} £</p>
           <button onClick={() => removedSavedItem(el)}>

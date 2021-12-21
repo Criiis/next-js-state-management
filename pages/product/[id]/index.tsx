@@ -1,4 +1,5 @@
 import productsDataTypes from '../../components/products'
+import Image from 'next/image'
 import { useCart } from '../../helper/CartProvider'
 import { useSavedItems } from '../../helper/SavedItemsProvider'
 
@@ -14,12 +15,20 @@ function SingleProduct({
     <div>
       <h1>{product?.title}</h1>
       <h5>{product?.category}</h5>
-      <img
-        src={product?.image}
-        alt={product?.title}
-        width='300px'
-        loading='lazy'
-      />
+      <div
+        style={{
+          position: 'relative',
+          width: '300px',
+          height: '300px',
+        }}
+      >
+        <Image
+          alt={product.title}
+          src={product.image}
+          layout='fill'
+          objectFit='contain' // Scale your image down to fit into the container
+        />
+      </div>
       <h5>{product?.price} £</h5>
       <button onClick={() => addItem(product, 1)}>Add to cart</button>
       <br />

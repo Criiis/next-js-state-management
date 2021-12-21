@@ -1,12 +1,9 @@
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import Link from 'next/dist/client/link'
 import { useCart } from './helper/CartProvider'
 import { contextProducts } from './helper/CartProvider.d'
-
-import {
-  useSavedItems,
-  useDispatchSavedItems,
-} from './helper/SavedItemsProvider'
+import { useSavedItems } from './helper/SavedItemsProvider'
 
 const Cart: NextPage = () => {
   const {
@@ -22,7 +19,20 @@ const Cart: NextPage = () => {
   //structure for the single item in the cart
   const singleCartProducts = state.map((el: contextProducts, i: number) => (
     <div key={i}>
-      <img loading='lazy' src={el.image} alt={el.title} width='150px' />
+      <div
+        style={{
+          position: 'relative',
+          width: '150px',
+          paddingBottom: '20%',
+        }}
+      >
+        <Image
+          alt={el.title}
+          src={el.image}
+          layout='fill'
+          objectFit='contain' // Scale your image down to fit into the container
+        />
+      </div>
       <p>{el.title}</p>
       <p>{el.price} £</p>
       <button onClick={() => addSingleQuantity(el)}>+</button>
