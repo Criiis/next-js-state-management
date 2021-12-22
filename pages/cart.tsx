@@ -28,6 +28,7 @@ const Cart: NextPage = () => {
         }}
       >
         <Image
+          priority={true}
           alt={el.title}
           src={el.image}
           layout='fill'
@@ -43,20 +44,22 @@ const Cart: NextPage = () => {
       )}
       <br />
       <button onClick={() => removeItem(el)}>remove from cart</button>
-      <br />
 
       {savedItemsState.find(
         //review this line of code
         (element: contextProducts) => element.id === el.id
       ) ? null : (
-        <button
-          onClick={() => {
-            addSavedItem(el)
-            removeItem(el)
-          }}
-        >
-          move to saved items
-        </button>
+        <>
+          <br />
+          <button
+            onClick={() => {
+              addSavedItem(el)
+              removeItem(el)
+            }}
+          >
+            move to saved items
+          </button>
+        </>
       )}
       <br />
       <Link href='/product/[id]' as={`/product/${el.id}`}>
