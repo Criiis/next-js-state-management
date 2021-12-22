@@ -23,6 +23,7 @@ const SavedItems: NextPage = () => {
             }}
           >
             <Image
+              priority={true}
               alt={el.title}
               src={el.image}
               layout='fill'
