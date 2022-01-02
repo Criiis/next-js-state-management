@@ -3,7 +3,6 @@ import { useCart } from '../helper/CartProvider'
 import { useSavedItems } from '../helper/SavedItemsProvider'
 import { BsFillHeartFill, BsBasketFill } from 'react-icons/bs'
 import styles from '../../styles/components/Menu.module.scss'
-console.log(styles)
 
 export default function Menu(): JSX.Element {
   const { totalItemsCart } = useCart()
