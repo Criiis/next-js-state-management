@@ -23,7 +23,7 @@ const CartContextState = createContext({} as contextTypes)
 // localStorage key
 const cartStorage: string = 'cartStorage'
 
-//reducer funcionality
+//reducer functionality
 const reducer = (state: stateType, action: action): stateType => {
   switch (action.type) {
     case ACTIONS.ADD: {
