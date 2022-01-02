@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react'
+import { useState, useReducer, useEffect, useCallback } from 'react'
 import type { NextPage } from 'next'
 // import { type } from 'os'
 
@@ -17,7 +17,6 @@ type reducerActions =
 function reducer(state: number, action: reducerActions): number {
   switch (action.type) {
     case actions.increment:
-      console.log(action)
       return state + action.numb
     case actions.decrement:
       if (state === 0) return state
@@ -31,6 +30,7 @@ const Home: NextPage = () => {
   const [test, setTest] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
   const [state, dispatch] = useReducer(reducer, 0)
+  const [timer, setTimer] = useState<number>(0)
 
   /**
    * functionality for useState
@@ -60,7 +60,25 @@ const Home: NextPage = () => {
     dispatch({ type: actions.decrement, numb })
   }
 
-  console.log(state)
+  /**
+   * create a timer in react using useEffect to lear
+   * the cleanup functionality
+   * useCallback hook
+   *
+   */
+  useEffect(() => {
+    console.log(timer)
+    const myTimer = setTimeout(() => {
+      setTimer((prevTimer) => prevTimer + 1)
+    }, 1000)
+    return () => {
+      clearTimeout(myTimer)
+    }
+  }, [timer])
+
+  const resetTimer = useCallback((initialNumber: number) => {
+    setTimer(initialNumber)
+  }, [])
 
   return (
     <>
@@ -69,15 +87,32 @@ const Home: NextPage = () => {
       {/* !false is a condition and i'm setting the value of useState as the result of the condition */}
       {test && <span>this is just a test to use useState</span>}
       <br />
+      <hr />
       <br />
       <button onClick={() => increase(1)}>+</button>
       {counter}
       <button onClick={() => decrease(1)}>-</button>
       <br />
+      <hr />
       <br />
       <button onClick={() => increaseUseReducer(1)}>+</button>
       {state}
       <button onClick={() => decreaseUseReducer(1)}>-</button>
+      <br />
+      <hr />
+      <br />
+
+      <p>{timer}</p>
+      <button onClick={() => resetTimer(0)}>reset timer</button>
+
+      <br />
+      <hr />
+      <br />
+      <p>
+        dependency arrays, useEffect, useMemo, useCallback
+        https://www.youtube.com/watch?v=lStfMBiWROQ clean up functions on
+        useEffect https://www.youtube.com/watch?v=F-0SZ_TicXA
+      </p>
     </>
   )
 }
