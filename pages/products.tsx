@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import ProductCard from './components/ProductCard'
 import productsDataTypes from './components/products.d'
@@ -10,6 +11,19 @@ interface Props {
 
 //page
 const Products: NextPage<Props> = ({ data }) => {
+  //this is just a test
+  const [state, setState] = useState(data) //save data in here and then filter the state
+  console.log(state)
+  /**
+   * filter by category ->
+   * Men = 'men's clothing'
+   * Jewelry = "jewelery"
+   * Electronics = 'electronics'
+   * Women = 'women's clothing'
+
+   * if no filter then use data
+   */
+
   const singleProduct = data?.map((el: productsDataTypes) => (
     <ProductCard el={el} key={el.id} />
   ))
