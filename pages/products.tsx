@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import ProductCard from './components/ProductCard'
 import productsDataTypes from './components/products.d'
@@ -11,16 +11,16 @@ interface Props {
 
 //page
 const Products: NextPage<Props> = ({ data }) => {
-  //this is just a test
+  //TODO - this is just a test
   const [state, setState] = useState(data) //save data in here and then filter the state
-  console.log(state)
+  // console.log(state)
   /**
    * filter by category ->
    * Men = 'men's clothing'
    * Jewelry = "jewelery"
    * Electronics = 'electronics'
    * Women = 'women's clothing'
-
+    //TODO
    * if no filter then use data
    */
 
