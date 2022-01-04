@@ -7,6 +7,7 @@ import HeadPage from './components/Head'
 import Menu from './components/Menu'
 import CartProvider from './helper/CartProvider'
 import SavedItemsProvider from './helper/SavedItemsProvider'
+import Loading from './components/Loading'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -14,27 +15,32 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const loadingBarController = (url: string) => {
-      console.clear()
-      console.log(router)
-      console.log(url)
+      router.asPath !== url ? setLoading(true) : setLoading(false)
     }
 
+    const loadingBarCompleted = () => setLoading(false)
+
     router.events.on('routeChangeStart', loadingBarController)
-    router.events.on('routeChangeComplete', loadingBarController)
+    router.events.on('routeChangeComplete', loadingBarCompleted)
+    router.events.on('routeChangeError', loadingBarCompleted)
     return () => {
       router.events.off('routeChangeStart', loadingBarController)
-      router.events.off('routeChangeComplete', loadingBarController)
+      router.events.off('routeChangeComplete', loadingBarCompleted)
+      router.events.off('routeChangeError', loadingBarCompleted)
     }
   }, [router])
 
   return (
-    <SavedItemsProvider>
-      <CartProvider>
-        <HeadPage />
-        <Menu />
-        <Component {...pageProps} />
-      </CartProvider>
-    </SavedItemsProvider>
+    <>
+      <Loading loading={loading} />
+      <SavedItemsProvider>
+        <CartProvider>
+          <HeadPage />
+          <Menu />
+          <Component {...pageProps} />
+        </CartProvider>
+      </SavedItemsProvider>
+    </>
   )
 }
 
