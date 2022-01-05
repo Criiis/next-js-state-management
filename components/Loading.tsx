@@ -1,10 +1,10 @@
-import loadingStyle from '../../styles/components/Loading.module.scss'
+import loadingStyle from '../styles/components/Loading.module.scss'
 
-export default function Loading(props: any) {
-  // useEffect(() => {
-  //   console.log('loading props', props)
-  // }, [props])
+interface props {
+  loading: boolean
+}
 
+export default function Loading(props: props) {
   return (
     <div
       className={`${loadingStyle.loadingContainer} ${

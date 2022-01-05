@@ -45,7 +45,7 @@ const SavedItemsProvider = ({ children }: { children: React.ReactNode }) => {
   //update the local storage
   useEffect(() => {
     setLocalStorage(state)
-  }, [state, localStorage])
+  }, [state, setLocalStorage])
 
   //add Saved Item functionality
   const addSavedItem = (payload: contextProducts): void => {

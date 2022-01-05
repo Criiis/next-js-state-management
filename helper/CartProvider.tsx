@@ -58,7 +58,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setLocalStorage(state) // update the local storage
-  }, [state, localStorage])
+  }, [state, setLocalStorage])
 
   //function to add items -> passing from CartContextState/useCart
   const addItem = (item: contextProducts, quantity = 1) => {

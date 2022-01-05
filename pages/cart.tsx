@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
-import { useCart } from './helper/CartProvider'
-import { contextProducts } from './helper/CartProvider.d'
-import { useSavedItems } from './helper/SavedItemsProvider'
+import { useCart } from '../helper/CartProvider'
+import { contextProducts } from '../helper/CartProvider.d'
+import { useSavedItems } from '../helper/SavedItemsProvider'
 
 const Cart: NextPage = () => {
   const {

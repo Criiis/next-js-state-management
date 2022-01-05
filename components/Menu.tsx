@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useCart } from '../helper/CartProvider'
 import { useSavedItems } from '../helper/SavedItemsProvider'
 import { BsFillHeartFill, BsBasketFill } from 'react-icons/bs'
-import styles from '../../styles/components/Menu.module.scss'
+import styles from '../styles/components/Menu.module.scss'
 
 export default function Menu(): JSX.Element {
   const { totalItemsCart } = useCart()

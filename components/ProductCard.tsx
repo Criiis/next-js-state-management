@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import styles from '../../styles/components/ProductCard.module.scss'
+import styles from '../styles/components/ProductCard.module.scss'
 import productsDataTypes from './products'
 import { useCart } from '../helper/CartProvider'
 import { useSavedItems } from '../helper/SavedItemsProvider'

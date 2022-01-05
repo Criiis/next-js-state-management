@@ -67,7 +67,7 @@ const Home: NextPage = () => {
    *
    */
   useEffect(() => {
-    console.log(timer)
+    // console.log(timer)
     const myTimer = setTimeout(() => {
       setTimer((prevTimer) => prevTimer + 1)
     }, 1000)

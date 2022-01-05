@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import productsDataTypes from './components/products'
-import { useSavedItems } from './helper/SavedItemsProvider'
-import { useCart } from './helper/CartProvider'
+import productsDataTypes from '../components/products'
+import { useSavedItems } from '../helper/SavedItemsProvider'
+import { useCart } from '../helper/CartProvider'
 
 const SavedItems: NextPage = () => {
   const { addItem } = useCart()

@@ -3,11 +3,11 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import type { AppProps } from 'next/app'
 
-import HeadPage from './components/Head'
-import Menu from './components/Menu'
-import CartProvider from './helper/CartProvider'
-import SavedItemsProvider from './helper/SavedItemsProvider'
-import Loading from './components/Loading'
+import HeadPage from '../components/Head'
+import Menu from '../components/Menu'
+import CartProvider from '../helper/CartProvider'
+import SavedItemsProvider from '../helper/SavedItemsProvider'
+import Loading from '../components/Loading'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

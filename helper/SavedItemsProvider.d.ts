@@ -1,4 +1,4 @@
-import { contextProducts } from './CartProvider.d'
+import { contextProducts } from './CartProvider'
 
 export type stateType = contextProducts[] | []
 

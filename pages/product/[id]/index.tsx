@@ -1,7 +1,7 @@
-import productsDataTypes from '../../components/products'
+import productsDataTypes from '../../../components/products'
 import Image from 'next/image'
-import { useCart } from '../../helper/CartProvider'
-import { useSavedItems } from '../../helper/SavedItemsProvider'
+import { useCart } from '../../../helper/CartProvider'
+import { useSavedItems } from '../../../helper/SavedItemsProvider'
 
 function SingleProduct({
   product,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
-import ProductCard from './components/ProductCard'
-import productsDataTypes from './components/products.d'
+import ProductCard from '../components/ProductCard'
+import productsDataTypes from '../components/products'
 import styles from '../styles/plp.module.scss'
 
 //props for the next page
