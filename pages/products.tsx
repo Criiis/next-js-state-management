@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch' //it is needed in the test
 import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import ProductCard from '../components/ProductCard'
