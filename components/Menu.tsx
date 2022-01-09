@@ -10,6 +10,11 @@ export default function Menu(): JSX.Element {
   return (
     <nav className={styles.headerNav}>
       <li>
+        <Link href='/api/auth/login'>
+          <a>Login</a>
+        </Link>
+      </li>
+      <li>
         <Link href='/'>
           <a>Home</a>
         </Link>
