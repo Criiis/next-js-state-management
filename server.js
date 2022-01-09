@@ -8,6 +8,8 @@ const handle = app.getRequestHandler()
 const httpsOptions = {
   key: fs.readFileSync('./certificates/localhost.key'),
   cert: fs.readFileSync('./certificates/localhost.crt'),
+  key: fs.readFileSync('./certificates/127.0.0.1.key'),
+  cert: fs.readFileSync('./certificates/127.0.0.1.crt'),
 }
 app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
@@ -15,6 +17,8 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl)
   }).listen(3000, (err) => {
     if (err) throw err
-    console.log('> Server started on https://localhost:3000')
+    console.log(
+      '> Server started on https://localhost:3000 or https://127.0.0.1:3000'
+    )
   })
 })
