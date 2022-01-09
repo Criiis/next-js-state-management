@@ -38,5 +38,5 @@ yarn-error.log*
 
 
 .env
-localhost.crt
-localhost.key
+.env.local
+certificates
