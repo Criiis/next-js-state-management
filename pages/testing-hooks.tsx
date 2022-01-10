@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react'
 import type { NextPage } from 'next'
 
 interface State {
@@ -16,9 +16,12 @@ const actions: { increment: 'INCREMENT'; showText: 'SHOWTEXT' } = {
 const reducer = (state: State, action: reducerActions): State => {
   switch (action.type) {
     case actions.increment:
+      const stateAfterAction = state.counter + action.numb
+      const stateShowTextEven = stateAfterAction % 2 === 0 ? true : false
+
       return {
-        counter: state.counter + action.numb,
-        showText: state.showText,
+        counter: stateAfterAction,
+        showText: stateShowTextEven,
       }
     case actions.showText:
       return {
@@ -32,16 +35,21 @@ const reducer = (state: State, action: reducerActions): State => {
 
 const Hooks: NextPage = () => {
   const [state, dispatch] = useReducer(reducer, {
-    counter: 0,
+    counter: 1,
     showText: true,
   })
+
+  useEffect(() => {
+    if (state.counter % 2 !== 0) dispatch({ type: actions.showText })
+  }, [])
+
   return (
     <>
       <h1>useReducer</h1>
       <button
         onClick={() => {
           dispatch({ type: actions.increment, numb: 1 })
-          dispatch({ type: actions.showText })
+          // dispatch({ type: actions.showText })
         }}
       >
         change the state
