@@ -33,9 +33,9 @@ const reducer = (state: State, action: reducerActions): State => {
   }
 }
 
-const Hooks: NextPage = () => {
+const reducerHook: NextPage = () => {
   const [state, dispatch] = useReducer(reducer, {
-    counter: 1,
+    counter: 0,
     showText: true,
   })
 
@@ -60,4 +60,4 @@ const Hooks: NextPage = () => {
   )
 }
 
-export default Hooks
+export default reducerHook
