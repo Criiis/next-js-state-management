@@ -16,8 +16,9 @@ const actions: { increment: 'INCREMENT'; showText: 'SHOWTEXT' } = {
 const reducer = (state: State, action: reducerActions): State => {
   switch (action.type) {
     case actions.increment:
-      const stateAfterAction = state.counter + action.numb
-      const stateShowTextEven = stateAfterAction % 2 === 0 ? true : false
+      const stateAfterAction: number = state.counter + action.numb
+      const stateShowTextEven: boolean =
+        stateAfterAction % 2 === 0 ? true : false
 
       return {
         counter: stateAfterAction,

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 //https://randomuser.me/api
 
-function fetchRandomUser() {
+function fetchRandomUser(): Promise<any> {
   return fetch('https://randomuser.me/api')
     .then((res) => res.json())
     .then((data) => data.results)
@@ -16,7 +16,7 @@ function fetchRandomUser() {
 const NextJSTraining: NextPage = () => {
   const [userData, setUserData] = useState([])
 
-  useEffect(() => {
+  useEffect((): void => {
     ;(async () => {
       setUserData(await fetchRandomUser())
     })()
