@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import type { AppProps } from 'next/app'
 
-import { UserProvider } from '@auth0/nextjs-auth0'
 import HeadPage from '../components/Head'
 import Menu from '../components/Menu'
 import CartProvider from '../helper/CartProvider'
@@ -33,16 +32,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <UserProvider>
-        <Loading loading={loading} />
-        <SavedItemsProvider>
-          <CartProvider>
-            <HeadPage />
-            <Menu />
-            <Component {...pageProps} />
-          </CartProvider>
-        </SavedItemsProvider>
-      </UserProvider>
+      <Loading loading={loading} />
+      <SavedItemsProvider>
+        <CartProvider>
+          <HeadPage />
+          <Menu />
+          <Component {...pageProps} />
+        </CartProvider>
+      </SavedItemsProvider>
     </>
   )
 }
